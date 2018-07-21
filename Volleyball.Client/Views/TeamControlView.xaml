@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="Volleyball.Client.Views.TeamControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Volleyball.Client.Views"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="1000">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ComboBox
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            SelectedItem="{Binding SelectedLeague}"
+            ItemsSource="{Binding LeagueDatas}"
+            mah:TextBoxHelper.ClearTextButton="True"
+            mah:TextBoxHelper.Watermark="League"
+            DisplayMemberPath="Name"
+            Margin="5"
+            Width ="270"
+            SelectionChanged="Selector_OnLeagueChanged"
+            />
+        <Button
+            Grid.Column="1"
+            Grid.Row="0"
+            Width="80"
+            Style="{DynamicResource AccentedSquareButtonStyle}"
+            Margin="5"
+            Command="{Binding League}"
+            mah:ButtonHelper.PreserveTextCase="True"
+            Content="New League"
+            VerticalAlignment="Top" HorizontalAlignment="Left" 
+           />
+
+        <ListView Name="lstTeams"
+                  Grid.Row="1"
+                  ItemsSource="{Binding TeamDatas}"
+                  SelectedItem="{Binding SelectedTeam, Mode=TwoWay}" Grid.ColumnSpan="3"
+                  AlternationCount="100">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Header="Poz." Width="30"
+                        DisplayMemberBinding="{Binding (ItemsControl.AlternationIndex),
+                        RelativeSource={RelativeSource AncestorType=ListViewItem}}" />
+                    <GridViewColumn Header="Name" Width="70" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="League" Width="70" DisplayMemberBinding="{Binding League.Name}" />
+                    <GridViewColumn Header="Country" Width="70" DisplayMemberBinding="{Binding League.Country}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Button
+                Style="{DynamicResource AccentedSquareButtonStyle}"
+                Margin="5"
+                Command="{Binding Team}"
+                mah:ButtonHelper.PreserveTextCase="True"
+                Content="New..."
+                Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            </Button>
+            <Button
+                Style="{DynamicResource SquareButtonStyle}"
+                Margin="5"
+                mah:ButtonHelper.PreserveTextCase="True"
+                Content="Edit..."
+                Width="80" VerticalAlignment="Top" HorizontalAlignment="Left">
+            </Button>
+            <Button
+                Command="{Binding RemoveTeamData}"
+                CommandParameter="{Binding SelectedTeam}"
+                Style="{DynamicResource SquareButtonStyle}"
+                Margin="5"
+                mah:ButtonHelper.PreserveTextCase="True"
+                Content="Delete"
+                Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

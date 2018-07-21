@@ -1,0 +1,19 @@
+﻿<mah:MetroWindow x:Class="Volleyball.Client.Views.StatisticMainView"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:local="clr-namespace:Volleyball.Client.Views"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 WindowState="Maximized"
+                 mc:Ignorable="d"
+                 MinHeight="700"
+                 MinWidth="1050"
+                 Height="700"
+                 Width="1050"
+                 Title="Statistics"
+                 ResizeMode="CanResizeWithGrip"
+                 GlowBrush="{DynamicResource AccentColorBrush}"
+                 NonActiveGlowBrush="{DynamicResource AccentColorBrush2}">
+    <Grid />
+</mah:MetroWindow>
