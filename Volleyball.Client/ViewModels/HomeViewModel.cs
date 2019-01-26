@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volleyball.Client.Views;
+﻿using Volleyball.Client.Views.MatchViews;
 
 namespace Volleyball.Client.ViewModels
 {
@@ -15,7 +10,7 @@ namespace Volleyball.Client.ViewModels
             NewMatch = new RelayCommand(OnNewMatch,null);
         }
 
-        private void OnNewMatch(object obj)
+        private static void OnNewMatch(object obj)
         {
             var newMatch = new StatisticMainView();
             newMatch.Show();

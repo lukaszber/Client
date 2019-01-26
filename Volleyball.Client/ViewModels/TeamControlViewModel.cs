@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Volleyball.Client.Dialog;
 using Volleyball.Client.Models;
@@ -16,17 +18,17 @@ namespace Volleyball.Client.ViewModels
         private Team _selectedTeam;
         private League _selectedLeague;
 
-        public ObservableCollection<Team> TeamDatas { get; private set; }
-        public ObservableCollection<Team> TeamList { get; private set; }
-        public ObservableCollection<League> LeagueDatas { get; private set; }
-        public RelayCommand RemoveTeamData { get; set; }
-        public RelayCommand Team { get; }
-        public RelayCommand LeagueChangeCommand { get; private set; }
-        public RelayCommand League { get; set; }
+        public ICollection<Team> TeamDatas { get; private set; }
+        public ICollection<Team> TeamList { get; }
+        public ICollection<League> LeagueDatas { get; }
+        public ICommand RemoveTeamData { get; set; }
+        public ICommand Team { get; }
+        public ICommand LeagueChangeCommand { get; private set; }
+        public ICommand League { get; set; }
 
-        public TeamControlViewModel(ObservableCollection<Team> teamDatas,RelayCommand team,RelayCommand league,
+        public TeamControlViewModel(ICollection<Team> teamDatas,ICommand team,ICommand league,
             IDialogService dialogService, IVolleyManagmentConnetion volleyManagmentConnetion,
-            ObservableCollection<League> leagueDatas
+            ICollection<League> leagueDatas
             )
         {
             _dialogService = dialogService;
@@ -39,7 +41,7 @@ namespace Volleyball.Client.ViewModels
             
             Initialize();
 
-            teamDatas.CollectionChanged += OnTeamCollectionChanged;
+            ((INotifyCollectionChanged)teamDatas).CollectionChanged += OnTeamCollectionChanged;
         }
 
 

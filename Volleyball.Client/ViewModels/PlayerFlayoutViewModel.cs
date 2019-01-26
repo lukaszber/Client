@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Volleyball.Client.Enums;
 using Volleyball.Client.Models;
 using Volleyball.Client.ServiceConnection;
@@ -16,17 +18,17 @@ namespace Volleyball.Client.ViewModels
         private int? _number;
         private int? _age;
         private IVolleyManagmentConnetion _volleyManagmentConnetion;
-        public RelayCommand OkCommand { get; }
+        public ICommand OkCommand { get; }
 
-        public RelayCommand AddPlayer { get; }
+        public ICommand AddPlayer { get; }
         
         public Array Positions { get; }
-        public ObservableCollection<Team> TeamDatas { get; }
+        public ICollection<Team> TeamDatas { get; }
 
-        public ObservableCollection<Player> PlayerDatas { get; }
+        public ICollection<Player> PlayerDatas { get; }
 
-        public PlayerFlayoutViewModel(Action closeAction,ObservableCollection<Team> teamData,
-            ObservableCollection<Player> playerDatas,IVolleyManagmentConnetion volleyManagmentConnetion)
+        public PlayerFlayoutViewModel(Action closeAction,ICollection<Team> teamData,
+            ICollection<Player> playerDatas,IVolleyManagmentConnetion volleyManagmentConnetion)
         {
             _volleyManagmentConnetion = volleyManagmentConnetion;
             Positions = Enum.GetValues(typeof(Position));

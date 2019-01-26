@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 
-namespace Volleyball.Client.Views
+namespace Volleyball.Client.Views.MatchViews
 {
     /// <summary>
     /// Interaction logic for StatisticMainView.xaml

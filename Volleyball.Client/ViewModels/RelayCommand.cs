@@ -20,10 +20,7 @@ namespace Volleyball.Client.ViewModels
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            if (execute == null)
-                throw new ArgumentNullException("execute");
-
-            this.execute = execute;
+            this.execute = execute ?? throw new ArgumentNullException("execute");
             this.canExecute = canExecute;
         }
 

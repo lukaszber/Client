@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Volleyball.Client.Models;
 using Volleyball.Client.ServiceConnection;
@@ -10,10 +11,10 @@ namespace Volleyball.Client.ViewModels
         private string _leagueName;
         private string _country;
         private IVolleyManagmentConnetion _volleyManagmentConnetion;
-        private ObservableCollection<League> _leagueDatas;
+        private ICollection<League> _leagueDatas;
         public RelayCommand OkCommand { get; }
         public RelayCommand AddLeague { get; set; }
-        public LeagueViewModel(Action closeAction, ObservableCollection<League> leagueDatas, IVolleyManagmentConnetion volleyManagmentConnetion)
+        public LeagueViewModel(Action closeAction, ICollection<League> leagueDatas, IVolleyManagmentConnetion volleyManagmentConnetion)
         {
             _leagueDatas = leagueDatas;
             _volleyManagmentConnetion = volleyManagmentConnetion;

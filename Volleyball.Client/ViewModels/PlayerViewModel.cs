@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Volleyball.Client.Dialog;
 using Volleyball.Client.Models;
@@ -10,27 +12,27 @@ namespace Volleyball.Client.ViewModels
 {
     public class PlayerViewModel : ViewModelBase
     {
-        private ObservableCollection<Player> _playerDatas;
+        private ICollection<Player> _playerDatas;
         private IVolleyManagmentConnetion _volleyManagmentConnetion;
         private League _selectedLeague;
         private Team _selectedTeam;
 
         private Player _selectedPlayer;
         private IDialogService _dialogService;
-        public RelayCommand PlayerFlayout { get; }
+        public ICommand PlayerFlayout { get; }
         public ObservableCollection<Player> PlayerDatas { get; set; }
-        public ObservableCollection<League> LeagueDatas { get; }
+        public ICollection<League> LeagueDatas { get; }
 
         public ObservableCollection<Team> TeamDatas { get; }
-        public ObservableCollection<Team> TeamList { get; set; }
+        public ICollection<Team> TeamList { get; set; }
         public RelayCommand CreateTeamDatas { get; set; }
         public RelayCommand CreatePlayerDatas { get; set; }
 
         public RelayCommand RemovePlayerData { get; set; }
 
-        public PlayerViewModel(ObservableCollection<Player> playerDatas, ObservableCollection<League> leagueDatas,
-            ObservableCollection<Team> teamDatas, IVolleyManagmentConnetion volleyballService,
-            RelayCommand playerFlayout
+        public PlayerViewModel(ICollection<Player> playerDatas, ICollection<League> leagueDatas,
+            ICollection<Team> teamDatas, IVolleyManagmentConnetion volleyballService,
+            ICommand playerFlayout
             , IDialogService dialogService)
         {
             _playerDatas = playerDatas;
@@ -41,13 +43,13 @@ namespace Volleyball.Client.ViewModels
             _dialogService = dialogService;
             PlayerDatas = new ObservableCollection<Player>();
             TeamDatas = new ObservableCollection<Team>();
-            TeamList.CollectionChanged += OnCreateTeamCommand;
+            ((INotifyCollectionChanged) TeamList).CollectionChanged += OnCreateTeamCommand;
 
             CreateTeamDatas = new RelayCommand(_ => OnCreateTeamCommand());
 
             CreatePlayerDatas = new RelayCommand(_ => OnCreatePlayerCommand());
 
-            RemovePlayerData = new RelayCommand(RemovePlayer, o => o != null);
+            RemovePlayerData = new RelayCommand(RemovePlayer, o =>  o != null);
         }
 
 
